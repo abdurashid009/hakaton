@@ -10,7 +10,7 @@ export default function DoctorDashboard() {
       {doctors.map((doc) => (
         <div key={doc.id} className="mb-6">
           <h2 className="text-xl font-bold text-gray-700 mb-2">
-            {doc.ism} ({doc.mutaxassislik})
+            {doc.name} ({doc.job})
           </h2>
           {doc.navbat.length === 0 ? (
             <p className="text-gray-500">Navbatda bemor yo‘q</p>

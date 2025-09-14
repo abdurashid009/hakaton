@@ -1,34 +1,11 @@
-// src/PatientDashboard.js
+// src/ReceptionDashboard.js
 import React, { useState } from "react";
 import QueueCard from "../components/QueueCard";
 import { useQueue } from "../QueueContext";
+import { doctors as shifokorlar } from "../data";
 
-export default function PatientDashboard() {
+export default function ReceptionDashboard() {
   const { queue, addPatient } = useQueue();
-
-  const shifokorlar = [
-    {
-      id: 1,
-      ism: "Dr. Karimov",
-      mutaxassis: "Terapevt",
-      bosh: "Prof. Abdullayev",
-      malumot: "Ichki kasalliklar bo‘yicha 15 yillik tajribaga ega.",
-    },
-    {
-      id: 2,
-      ism: "Dr. Akhmedova",
-      mutaxassis: "Pediatr",
-      bosh: "Prof. Hamidova",
-      malumot: "Bolalar kasalliklari bo‘yicha tajribali shifokor.",
-    },
-    {
-      id: 3,
-      ism: "Dr. Ismoilov",
-      mutaxassis: "Kardiolog",
-      bosh: "Prof. Tursunov",
-      malumot: "Yurak-qon tomir kasalliklari bo‘yicha mutaxassis.",
-    },
-  ];
 
   const vaqtlar = ["09:00", "09:30", "10:00", "10:30", "11:00"];
 
@@ -43,7 +20,7 @@ export default function PatientDashboard() {
   const handleInputChange = (e) => {
     setNewPatient({ ...newPatient, [e.target.name]: e.target.value });
     if (e.target.name === "shifokor") {
-      const doc = shifokorlar.find((d) => d.ism === e.target.value);
+      const doc = shifokorlar.find((d) => d.name === e.target.value);
       setTanlanganDoctor(doc || null);
     }
   };
@@ -74,17 +51,17 @@ export default function PatientDashboard() {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-green-700">🧑‍⚕️ Bemor Paneli</h1>
-      {/* Bemor yozilish formasi */}
+      <h1 className="text-2xl font-bold text-blue-700">🏥 Qabulxona Paneli</h1>
+      {/* Bemor qo‘shish */}
       <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-        <h2 className="text-lg font-semibold mb-2">📅 Qabulga yozilish</h2>
+        <h2 className="text-lg font-semibold mb-2">➕ Yangi bemor qo‘shish</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <input
             type="text"
             name="bemor"
             value={newPatient.bemor}
             onChange={handleInputChange}
-            placeholder="Ismingiz"
+            placeholder="Bemor ismi"
             className="border p-2 rounded"
           />
           <select
@@ -95,8 +72,8 @@ export default function PatientDashboard() {
           >
             <option value="">Shifokor tanlang</option>
             {shifokorlar.map((doc) => (
-              <option key={doc.id} value={doc.ism}>
-                {doc.ism} ({doc.mutaxassis})
+              <option key={doc.id} value={doc.name}>
+                {doc.name} ({doc.job})
               </option>
             ))}
           </select>
@@ -121,44 +98,38 @@ export default function PatientDashboard() {
             ))}
           </select>
         </div>
-        {/* Shifokor haqida ma’lumot */}
+        {/* Tanlangan shifokor haqida ma’lumot */}
         {tanlanganDoctor && (
           <div className="mt-3 p-3 bg-white rounded shadow">
             <h3 className="font-bold text-lg text-gray-700">
               {" "}
-              🩺 {tanlanganDoctor.ism}{" "}
+              🩺 {tanlanganDoctor.name}{" "}
             </h3>
-            <p>🔹 Mutaxassisligi: {tanlanganDoctor.mutaxassis}</p>
-            <p>👨‍⚕️ Bo‘lim boshlig‘i: {tanlanganDoctor.bosh}</p>
+            <p>🔹 Mutaxassisligi: {tanlanganDoctor.job}</p>
             <p className="text-sm text-gray-600">
               {" "}
-              ℹ️ {tanlanganDoctor.malumot}{" "}
+              ℹ️ {tanlanganDoctor.description}{" "}
             </p>
           </div>
         )}
         <button
           onClick={handleAddPatient}
-          className="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          className="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
-          Yozilish
+          Qo‘shish
         </button>
       </div>
-      {/* O‘z navbatini ko‘rish */}
+      {/* Navbat ro‘yxati */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {queue
-          .filter(
-            (item) =>
-              item.bemor.toLowerCase() === newPatient.bemor.toLowerCase()
-          )
-          .map((item) => (
-            <QueueCard
-              key={item.id}
-              bemor={item.bemor}
-              shifokor={item.shifokor}
-              vaqt={item.vaqt}
-              holat={item.holat}
-            />
-          ))}
+        {queue.map((item) => (
+          <QueueCard
+            key={item.id}
+            bemor={item.bemor}
+            shifokor={item.shifokor}
+            vaqt={item.vaqt}
+            holat={item.holat}
+          />
+        ))}
       </div>
     </div>
   );

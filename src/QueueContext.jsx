@@ -20,7 +20,7 @@ export function QueueProvider({ children }) {
     return initialDoctors.map((doc) => ({
       ...doc,
       navbat: parsedQueue
-        .filter((item) => item.shifokor === doc.ism)
+        .filter((item) => item.shifokor === doc.name)
         .map((item) => ({
           ism: item.bemor,
           doctor: item.shifokor,
@@ -38,7 +38,7 @@ export function QueueProvider({ children }) {
       prevDoctors.map((doc) => ({
         ...doc,
         navbat: queue
-          .filter((item) => item.shifokor === doc.ism)
+          .filter((item) => item.shifokor === doc.name)
           .map((item) => ({
             ism: item.bemor,
             doctor: item.shifokor,

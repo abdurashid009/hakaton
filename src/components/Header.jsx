@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import Logo from "../assets/logo.png"
+import Sertify from "../assets/Ser.jpg"
 
 export default function Header() {
   return (
     <header className="bg-blue-600 text-white shadow-md sticky top-0 z-50">
       <nav className="container mx-auto flex items-center justify-between p-4">
-        <h1 className="text-xl font-bold">Shifoxona Navbat Tizimi</h1>
+        <img className=" w-18" src={Logo} alt="" />
         <ul className="flex space-x-6">
           <li>
             <Link to="/" className="hover:underline">
@@ -33,6 +35,7 @@ export default function Header() {
           </li>
         </ul>
       </nav>
+     
     </header>
   );
 }

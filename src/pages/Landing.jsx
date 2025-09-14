@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Ser from "../assets/Ser.jpg"
 
 export default function Landing() {
   return (
@@ -23,6 +24,10 @@ export default function Landing() {
           Qabulxona
         </Link>
       </div>
+      <main className=" flex justify-center items-center gap-[30px]">
+        <h1 className=" text-[]">Biz haqimizda</h1>
+        <img className=" w-40" src={Ser} alt="" />
+      </main>
     </section>
   );
 }
