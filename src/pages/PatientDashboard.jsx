@@ -73,9 +73,9 @@ export default function PatientDashboard() {
         🧑‍⚕️ Qabulxona Paneli
       </h1>
 
-      {/* Registration card */}
+ 
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row rounded-2xl shadow-2xl overflow-hidden bg-white">
-        {/* Left side (info / image) */}
+    
         <div className="md:w-1/3 bg-gradient-to-b from-blue-600 to-blue-400 text-white flex flex-col justify-center items-center p-8">
           <h2 className="text-2xl font-bold mb-2">📅 Qabulga yozilish</h2>
           <p className="text-sm opacity-80 text-center">
@@ -89,7 +89,7 @@ export default function PatientDashboard() {
           />
         </div>
 
-        {/* Right side (form) */}
+ 
         <div className="md:w-2/3 p-8 bg-white flex flex-col justify-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <input
@@ -157,7 +157,6 @@ export default function PatientDashboard() {
         </div>
       </div>
 
-      {/* Patient’s own queue */}
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
         {queue
           .filter(

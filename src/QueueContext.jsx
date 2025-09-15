@@ -1,4 +1,3 @@
-// src/QueueContext.js
 import { createContext, useContext, useState, useEffect } from "react";
 import { doctors as initialDoctors } from "./data";
 
@@ -7,13 +6,13 @@ const QueueContext = createContext();
 export const useQueue = () => useContext(QueueContext);
 
 export function QueueProvider({ children }) {
-  // Initialize queue from localStorage
+
   const [queue, setQueue] = useState(() => {
     const saved = localStorage.getItem("navbat");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Initialize doctors with their queues populated from localStorage
+
   const [doctors, setDoctors] = useState(() => {
     const savedQueue = localStorage.getItem("navbat");
     const parsedQueue = savedQueue ? JSON.parse(savedQueue) : [];
@@ -30,10 +29,9 @@ export function QueueProvider({ children }) {
     }));
   });
 
-  // Sync queue changes to localStorage and update doctors' navbat
   useEffect(() => {
     localStorage.setItem("navbat", JSON.stringify(queue));
-    // Update doctors' navbat whenever queue changes
+
     setDoctors((prevDoctors) =>
       prevDoctors.map((doc) => ({
         ...doc,
@@ -49,7 +47,7 @@ export function QueueProvider({ children }) {
     );
   }, [queue]);
 
-  // Add a patient to the queue
+
   const addPatient = (patient) => {
     const newPatient = {
       id: Date.now(),
@@ -59,7 +57,6 @@ export function QueueProvider({ children }) {
       holat: "kutmoqda",
     };
 
-    // Update queue
     setQueue((prevQueue) => [...prevQueue, newPatient]);
   };
 
